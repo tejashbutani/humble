@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:humble/home_page.dart';
+import 'package:humble/utils.dart';
 
 class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({Key? key}) : super(key: key);
@@ -10,6 +12,16 @@ class AuthenticationPage extends StatefulWidget {
 class _AuthenticationPageState extends State<AuthenticationPage> {
   String _email = '';
   String _password = '';
+
+  void onLoginClicked(){
+    if(Utils().isEmailValid(_email) && Utils().isPasswordValid(_password)) {
+      if (_email == 'abc@xyz.com' && _password == '123456') {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    }else{
+      Fluttertoast.showToast(msg: "Invalid Credentials", webBgColor: "linear-gradient(to right, #000000, #000000)");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +75,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 ),
             const SizedBox(height: 24.0),
             InkWell(
-              onTap: () {
-                if(_email == 'abc@xyz.com' && _password == '123456'){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-                }
-              },
+              onTap: () => onLoginClicked(),
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
