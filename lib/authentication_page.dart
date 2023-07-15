@@ -20,7 +20,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         setState(() {
           _status = 'VALID';
         });
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }else{
       Fluttertoast.showToast(msg: "Invalid Credentials", webBgColor: "linear-gradient(to right, #000000, #000000)");
