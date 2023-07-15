@@ -12,11 +12,15 @@ class AuthenticationPage extends StatefulWidget {
 class _AuthenticationPageState extends State<AuthenticationPage> {
   String _email = '';
   String _password = '';
+  String _status = '';
 
   void onLoginClicked(){
     if(Utils().isEmailValid(_email) && Utils().isPasswordValid(_password)) {
       if (_email == 'abc@xyz.com' && _password == '123456') {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        setState(() {
+          _status = 'VALID';
+        });
+        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }else{
       Fluttertoast.showToast(msg: "Invalid Credentials", webBgColor: "linear-gradient(to right, #000000, #000000)");
@@ -32,6 +36,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(_status),
             Image.asset('assets/logo.png'),
             Column(
                mainAxisAlignment: MainAxisAlignment.start,
@@ -44,6 +49,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                   child: TextField(
+                      key: Key('email_field'),
                     onChanged: (value) {
                       setState(() {
                         _email = value;
@@ -62,6 +68,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                   child: TextField(
+                    key: Key('password_field'),
                     onChanged: (value) {
                       setState(() {
                         _password = value;
@@ -75,6 +82,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 ),
             const SizedBox(height: 24.0),
             InkWell(
+              key: Key('login_button'),
               onTap: () => onLoginClicked(),
               child: Container(
                 width: double.infinity,
