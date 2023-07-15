@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:humble/authentication.dart';
+import 'package:humble/authentication_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Humble',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
       home: const AuthenticationPage(),
     );
